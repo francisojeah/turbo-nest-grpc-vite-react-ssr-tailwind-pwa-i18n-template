@@ -14,10 +14,10 @@ export class UsersService implements OnModuleInit{
   onModuleInit() {
       for (let i=0; i <= 100; i++){
         let createUserDto: CreateUserDto = {
-          primaryEmailAddress: `piosystems${i}@yahoo.co.uk`,
+          primaryEmailAddress: `ojeahfrancis${i}@gmail.com`,
           passwordHash: randomUUID(),
-          firstName: `Pio${i}`,
-          lastName: `Systems${i}`
+          firstName: `Francis${i}`,
+          lastName: `Okocha-Ojeah${i}`
         }
         this.create(createUserDto)
       }
