@@ -8,6 +8,9 @@ import { assetMap as aM } from './global/backend.settings';
 import * as acceptLangParser from 'accept-language-parser';
 import App from "../../users-demo-frontend/src/App";
 
+//import { join } from 'path';
+//import { I18nextProvider } from 'react-i18next';
+
 import { RequestExtended as Request } from './global/app.interfaces';
 
 @Controller()
