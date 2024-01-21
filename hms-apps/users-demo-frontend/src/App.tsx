@@ -11,6 +11,7 @@ import { AppContextType } from "./global/contexts";
 import { createContext, useEffect } from "react";
 import { DEV_MODE } from "./global/frontend.settings";
 import { useTranslation } from 'react-i18next';
+import NoMatch from "./components/NoMatch";
 
 
 type Props = {
@@ -83,6 +84,7 @@ const App: React.FC<Props> = ({ assetMap }) => {
           <Route path={`${baseUrl}`} element={<Layout />}>
             <Route index element={<Home />} />
             <Route path="view-users" element={<Users />} />
+            <Route path="*" element={<NoMatch />} />
           </Route>
         </Routes>
       </ThemeProvider>
