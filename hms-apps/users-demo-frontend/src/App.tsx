@@ -8,7 +8,33 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query'
 
-function App() {
+type Props = {
+  assetMap?: {
+    'styles.css': string,
+    'main.js': string,
+    'manifest'?: string,
+    'vite-plugin-pwa:register-sw'?: string,
+    'additional-styles': string[],
+    'additional-jss': string[],
+    initialContentMap: {
+      'title': string,
+      'description'?: string,
+      'hello-message'?: string,
+    },
+    baseUrl: string,
+    initialI18nStore?: {},//to be used with the middleware
+    initialLanguage?: string,
+    clientFirstAcceptLanguage?: string
+
+  },
+
+}
+
+//create a context to be used to pass app props down the component hierarcy, as the need arises.
+// export const AppContext = createContext<AppContextType>(null);
+
+const App: React.FC<Props> = ({ assetMap }) => {
+
   const baseUrl = "/";
   //create a react query client at the top
   // Create a client
