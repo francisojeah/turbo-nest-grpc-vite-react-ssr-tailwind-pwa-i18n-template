@@ -1,4 +1,4 @@
-import { Route, Routes, useParams } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import Layout from "./components/Layout"
 import Home from "./components/Home";
 import Users from "./components/Users";
@@ -69,6 +69,7 @@ const App: React.FC<Props> = ({ assetMap }) => {
       baseUrl = assetMap.baseUrl;
       title = assetMap.initialContentMap.title!;
     }
+    console.log(title);
     //console.log(`assetMap in AppWithNavDemo = ${JSON.stringify(assetMap)}`)
 
   //create a react query client at the top
@@ -150,11 +151,11 @@ return (
 )
 }
 
-const UseParams: React.FC = () => {
-let { name } = useParams();
-return (
-  <h3>Hello {name}</h3>
-);
-}
+// const UseParams: React.FC = () => {
+// let { name } = useParams();
+// return (
+//   <h3>Hello {name}</h3>
+// );
+// }
 
 export default App
