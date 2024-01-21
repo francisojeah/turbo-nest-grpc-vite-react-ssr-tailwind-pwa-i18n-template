@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { AppContext } from "../../AppWithNavDemo";
+import { AppContext } from "src/App";
 
 const NoMatch:React.FC = () => {
   const baseUrl = useContext(AppContext)?.baseUrl;
