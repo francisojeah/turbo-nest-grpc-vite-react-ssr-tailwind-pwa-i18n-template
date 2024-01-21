@@ -2,13 +2,12 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { VersioningType } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { NestExpressApplication } from '@nestjs/platform-express';
+
+require('dotenv').config();
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-
-  app.enableVersioning({
-    type: VersioningType.URI,
-  });
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle(process.env.APP_NAME)
@@ -17,6 +16,10 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig, {
     ignoreGlobalPrefix: false,
+  });
+
+  app.enableVersioning({
+    type: VersioningType.URI,
   });
 
   try {
@@ -29,6 +32,11 @@ async function bootstrap() {
     this.logger.error(error);
   }
   
-  await app.listen(3002);
+  await app.listen(
+    process.env.APP_SERVER_LISTEN_PORT,
+    process.env.APP_SERVER_LISTEN_IP,
+  );
+
+  console.log(`Application is running on: ${await app.getUrl()}`);
 }
 bootstrap();
