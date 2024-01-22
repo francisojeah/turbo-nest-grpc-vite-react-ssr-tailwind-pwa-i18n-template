@@ -11,23 +11,23 @@ import { Observable } from 'rxjs';
 export class UsersController implements UsersServiceController {
   constructor(private readonly usersService: UsersService) {}
 
-  createUser(createUserDto: CreateUserDto) {
+  create(createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
-  findAllUsers() {
+  findAll() {
     return this.usersService.findAll();
   }
 
-  findOneUser(findOneUserDto: FindOneUserDto) {
+  findOne(findOneUserDto: FindOneUserDto) {
     return this.usersService.findOne(findOneUserDto.id);
   }
 
-  updateUser(updateUserDto: UpdateUserDto) {
+  update(updateUserDto: UpdateUserDto) {
     return this.usersService.update(updateUserDto.id, updateUserDto);
   }
 
-  removeUser(findOneUserDto: FindOneUserDto) {
+  remove(findOneUserDto: FindOneUserDto) {
     return this.usersService.remove(findOneUserDto.id);
   }
 
@@ -36,7 +36,7 @@ export class UsersController implements UsersServiceController {
       
   }
 
-  findOneUserByPrimaryEmailAddress(findOneUserByPrimaryEmailAddressDto: FindOneUserByPrimaryEmailAddressDto){
+  async findOneUserByPrimaryEmailAddress(findOneUserByPrimaryEmailAddressDto: FindOneUserByPrimaryEmailAddressDto){
     return this.usersService.findOneUserByPrimaryEmailAddress(findOneUserByPrimaryEmailAddressDto.primaryEmailAddress);
   }
 }

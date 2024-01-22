@@ -410,7 +410,7 @@ export interface UsersServiceController {
   queryUsers(request: Observable<PaginationDto>): Observable<Users>;
 
   findOneUserByPrimaryEmailAddress(
-    request: FindOneUserByPrimaryEmailAddressDto,
+   primaryEmailAddress: string,
   ): Promise<User> | Observable<User> | User;
 }
 

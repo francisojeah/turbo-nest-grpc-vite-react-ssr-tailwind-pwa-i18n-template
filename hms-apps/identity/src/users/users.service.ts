@@ -1,29 +1,27 @@
-import { Injectable, NotFoundException, OnModuleInit } from '@nestjs/common';
-//import { CreateUserDto } from './dto/create-user.dto';
-//import { UpdateUserDto } from './dto/update-user.dto';
-import { CreateUserDto, PaginationDto, UpdateUserDto, Users } from '@common/hms-lib';
-import { User } from '@common/hms-lib';
+// users.service.ts
+import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Observable } from 'rxjs';
 import { randomUUID } from 'crypto';
-import { Observable, Subject } from 'rxjs';
+import {
+  CreateUserDto,
+  FindOneUserByPrimaryEmailAddressDto,
+  PaginationDto,
+  UpdateUserDto,
+  Users,
+  UsersServiceController,
+} from '@common/hms-lib';
+import { User } from './entities/user.entity';
 
 @Injectable()
-export class UsersService implements OnModuleInit{
-  //static user data for demo purpose only
-  private readonly users:User[] = [];
+export class UsersService implements UsersServiceController {
+  constructor(
+    @InjectRepository(User) private readonly userRepository: Repository<User>,
+  ) {}
 
-  onModuleInit() {
-      for (let i=0; i <= 100; i++){
-        let createUserDto: CreateUserDto = {
-          primaryEmailAddress: `ojeahfrancis${i}@gmail.com`,
-          passwordHash: randomUUID(),
-          firstName: `Francis${i}`,
-          lastName: `Okocha-Ojeah${i}`
-        }
-        this.create(createUserDto)
-      }
-  }
-  create(createUserDto: CreateUserDto): User {
-    const user:User = { //these should be from entity
+  async create(createUserDto: CreateUserDto): Promise<User> {
+    const user: User = {
       ...createUserDto,
       id: randomUUID(),
       primaryEmailAddress: createUserDto.primaryEmailAddress,
@@ -33,61 +31,56 @@ export class UsersService implements OnModuleInit{
       phone: {},
       isPrimaryEmailAddressVerified: false,
       isBackupEmailAddressVerified: false,
-      passwordHash: randomUUID()
+      passwordHash: randomUUID(),
+    };
+
+    return this.userRepository.save(user);
+  }
+
+  async findAll(): Promise<User[]> {
+    const users = this.userRepository.find();
+    return users ;
+  }
+
+  async findOne(id: string): Promise<User> {
+    return this.userRepository.findOne({ where: { id } });
+  }
+
+  async update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
+    const user = await this.findOne(id);
+
+    if (!user) {
+      throw new Error('User not found!');
     }
-    this.users.push(user);
+
+    const updatedUser = await this.userRepository.save({
+      ...user,
+      ...updateUserDto,
+    });
+
+    return updatedUser;
+  }
+
+  async remove(id:string): Promise<User> {
+    const user = await this.findOne(id);
+
+    if (!user) {
+      throw new Error('User not found!');
+    }
+
+    await this.userRepository.remove(user);
     return user;
   }
 
-  findAll(): Users {
-    return {users: this.users};
+  queryUsers(request: Observable<PaginationDto>): Observable<Users> {
+    // Implement your query logic here using the observable
+    // ...
+    return new Observable<Users>(); // Return an observable
   }
 
-  findOne(id: string): User {
-    return this.users.find((user) => user.id === id);
-  }
-
-  update(id: string, updateUserDto: UpdateUserDto): User {
-    const userIndex = this.users.findIndex((user) => user.id === id);
-    if (userIndex !== -1){
-      this.users[userIndex] = {
-        ...this.users[userIndex],
-        ...updateUserDto
-      }
-      return this.users[userIndex]
-    }
-    throw new NotFoundException(`User not found by id ${id}`);
-  }
-
-  remove(id: string) {
-    const userIndex = this.users.findIndex((user) => user.id === id);
-    if (userIndex !== -1){
-      return this.users.splice(userIndex)[0];
-    }
-    throw new NotFoundException(`User not found by id ${id}`);
-  }
-
-  queryUsers(paginationDtoStream: Observable<PaginationDto>): Observable<Users>{
-    const subject = new Subject<Users>();
-    const onNext = (paginationDto: PaginationDto) => {
-      const start = paginationDto.page * paginationDto.skip;
-      subject.next({
-        users: this.users.slice(start, start + paginationDto.skip)
-      });
-    };
-
-    const onComplete = () => subject.complete();
-
-    paginationDtoStream.subscribe({
-      next: onNext,
-      complete: onComplete
-    });
-
-    return subject.asObservable();
-
-  }
-
-  findOneUserByPrimaryEmailAddress(primaryEmailAddress: string): User {
-    return this.users.find((user) => user.primaryEmailAddress === primaryEmailAddress);
+  async findOneUserByPrimaryEmailAddress(
+    primaryEmailAddress:string
+  ): Promise<User> {
+    return this.userRepository.findOne({ where: { primaryEmailAddress } });
   }
 }
