@@ -5,14 +5,14 @@ export const initialContentMap = {
 
 export const assetMap = {
   'styles.css': '/assets/index-q2O1eRrF.css',
-  'main.js': '/assets/index-no9XVrig.js',
+  'main.js': '/assets/index-hfbNqxqh.js',
   'manifest': '/manifest.webmanifest',
   'vite-plugin-pwa:register-sw': '/registerSW.js',
   'additional-styles': [],//sufficient to drop flowbite.min.css in src/assets folder, to be incorporated at build time
   //'additional-jss': ["https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js", "/custom-assets/flowbite/dist/datepicker.min.js"],//manually copied to public asset folder from node-modules
   'additional-jss': ["/cassets/flowbite/dist/flowbite.min.js", "/cassets/flowbite/dist/datepicker.min.js"],//manually copied to public asset folder from node-modules
   initialContentMap,
-  baseUrl: '/',
+  baseUrl: '/v1',
   initialI18nStore: {},//to be used later with middleware
   initialLanguage: "en-US",//to be used later with middleware
   clientFirstAcceptLanguage:""//for passing req accept-language for lang adjustment. Better to have a setting for it.
