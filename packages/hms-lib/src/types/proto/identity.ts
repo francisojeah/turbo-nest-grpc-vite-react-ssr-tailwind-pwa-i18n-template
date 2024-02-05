@@ -324,7 +324,7 @@ export interface User {
   isActive?: boolean | undefined;
   isSoftDeleted?: boolean | undefined;
   backupEmailAddress: string;
-  phone: { [key: string]: any } | undefined;
+  phone: string | undefined;
   isPrimaryEmailAddressVerified: boolean;
   isBackupEmailAddressVerified: boolean;
   passwordSalt?: string | undefined;
@@ -410,7 +410,7 @@ export interface UsersServiceController {
   queryUsers(request: Observable<PaginationDto>): Observable<Users>;
 
   findOneUserByPrimaryEmailAddress(
-   primaryEmailAddress: string,
+    request: FindOneUserByPrimaryEmailAddressDto,
   ): Promise<User> | Observable<User> | User;
 }
 
