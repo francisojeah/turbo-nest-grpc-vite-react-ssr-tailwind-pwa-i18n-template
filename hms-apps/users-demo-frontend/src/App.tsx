@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom"
 import Layout from "./components/Layout"
 import Home from "./components/Home";
 import Users from "./components/Users";
-import { ThemeProvider } from "@/components/theme-provider"
+import { ThemeProvider } from "../@/components/theme-provider"
 import {
   QueryClient,
   QueryClientProvider,
@@ -53,9 +53,9 @@ const App: React.FC<Props> = ({ assetMap }) => {
     if (!DEV_MODE) {
       //attempt to change language here to locale
       changeI18nLanguageToClientPreferred();
-      if (!assetMap) {
-        window.location.href = '/web'; //simulate a mouse click
-      }
+      // if (!assetMap) {
+      //   window.location.href = '/web'; //simulate a mouse click
+      // }
     }
   })
 
@@ -139,7 +139,7 @@ const output = () => {
   } else {
     return (
       <>
-        {appBody()} //only the body in dev mode. CSS should be available at dev mode with createRoot
+        {appBody()}
       </>
     )
   }
