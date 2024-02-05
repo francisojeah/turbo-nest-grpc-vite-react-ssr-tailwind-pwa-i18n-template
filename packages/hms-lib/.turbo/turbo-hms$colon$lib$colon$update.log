@@ -2,10 +2,12 @@
 > hms:lib:update
 > copyfiles -u 3 ../../hms-apps/google/**/* ../../hms-apps/proto/**/*.ts src/types && npm install
 
+(node:29708) MaxListenersExceededWarning: Possible EventEmitter memory leak detected. 11 close listeners added to [TLSSocket]. Use emitter.setMaxListeners() to increase limit
+(Use `node --trace-warnings ...` to show where the warning was created)
 
-up to date, audited 1780 packages in 20s
+up to date, audited 1811 packages in 49s
 
-380 packages are looking for funding
+384 packages are looking for funding
   run `npm fund` for details
 
 found 0 vulnerabilities
