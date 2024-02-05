@@ -324,7 +324,7 @@ export interface User {
   isActive?: boolean | undefined;
   isSoftDeleted?: boolean | undefined;
   backupEmailAddress: string;
-  phone: string | undefined;
+  phone: { [key: string]: any } | undefined;
   isPrimaryEmailAddressVerified: boolean;
   isBackupEmailAddressVerified: boolean;
   passwordSalt?: string | undefined;
