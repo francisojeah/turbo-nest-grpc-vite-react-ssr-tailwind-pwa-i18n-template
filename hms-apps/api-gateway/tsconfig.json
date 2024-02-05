@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "jsx": "react-jsx",
+    "jsx": "react-jsx", //added by Pius for and TSX compilation
     "module": "commonjs",
     "declaration": true,
     "removeComments": true,
@@ -18,9 +18,5 @@
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
-    "paths": {
-      "@/*": ["../users-demo-frontend/@/*"]
-    }
-  },
-  "include": ["src", "@"],
+  }
 }

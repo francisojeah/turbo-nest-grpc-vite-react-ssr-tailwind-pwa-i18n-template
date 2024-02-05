@@ -27,7 +27,7 @@ export class AppController {
   getHelloWithSsr(@Req() req: Request, @Res() res: Response) {
     let assetMap = {
       ...this.assetMap,
-      baseUrl: "/web",
+      baseUrl: "/v1",
       initialContentMap: {
         ...this.initialContentMap, 'hello-message': this.appService.getHello(),
         initialLanguage: 'en-US',

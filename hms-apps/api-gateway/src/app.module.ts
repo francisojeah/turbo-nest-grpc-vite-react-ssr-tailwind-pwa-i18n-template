@@ -9,16 +9,14 @@ import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { typeOrmConfig } from './configurations/typeorm.config';
 
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '../../..', 'users-demo-frontend', 'dist'),
+      rootPath: join(__dirname, '../../../..', 'users-demo-frontend', 'dist'),
       exclude: ['/api*'],
     }),
-    TypeOrmModule.forRoot(typeOrmConfig),
+    // TypeOrmModule.forRoot(typeOrmConfig),
     EmployeesModule,
     PatientsModule,
     ClinicsModule,
