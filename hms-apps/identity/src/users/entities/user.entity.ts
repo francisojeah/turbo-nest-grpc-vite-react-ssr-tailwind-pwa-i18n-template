@@ -23,8 +23,8 @@ export class User {
   @Column()
   backupEmailAddress: string;
 
-  @Column({ nullable: true })
-  phone: string | undefined;
+  @Column("json", { nullable: true })
+  phone: object | null;
 
   @Column({ default: false })
   isPrimaryEmailAddressVerified: boolean;

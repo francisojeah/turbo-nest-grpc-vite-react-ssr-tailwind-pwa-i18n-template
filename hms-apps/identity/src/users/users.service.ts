@@ -18,8 +18,7 @@ import { User } from './entities/user.entity';
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
-  ) {}
+    private readonly userRepository: Repository<User>) {}
 
   async create(createUserDto: CreateUserDto): Promise<UserProps> {
     const user = await this.findOneUserByPrimaryEmailAddress(
@@ -40,7 +39,7 @@ export class UsersService {
     //   firstName: createUserDto.firstName,
     //   lastName: createUserDto.lastName,
     //   backupEmailAddress: '',
-    //   phone: '',
+    //   phone: {},
     //   isPrimaryEmailAddressVerified: false,
     //   isBackupEmailAddressVerified: false,
     //   passwordHash: randomUUID()
@@ -49,7 +48,7 @@ export class UsersService {
 
     const userProps: UserProps = {
       ...theuser,
-      phone: '',
+      phone: {},
       isPrimaryEmailAddressVerified: false,
       isBackupEmailAddressVerified: false,
     };
@@ -63,7 +62,7 @@ export class UsersService {
     const userProps: UserProps[] = users.map((user) => ({
       ...user,
 
-      phone: '',
+      phone: {},
       isPrimaryEmailAddressVerified: false,
       isBackupEmailAddressVerified: false,
     }));
@@ -78,7 +77,7 @@ export class UsersService {
     const userProps: UserProps = {
       ...user,
 
-      phone: '',
+      phone: {},
       isPrimaryEmailAddressVerified: false,
       isBackupEmailAddressVerified: false,
     };
@@ -107,7 +106,7 @@ export class UsersService {
 
     const userProps: UserProps = {
       ...newUser,
-      phone: '',
+      phone: {},
       isPrimaryEmailAddressVerified: false,
       isBackupEmailAddressVerified: false,
     };
@@ -130,7 +129,7 @@ export class UsersService {
 
     const userProps: UserProps = {
       ...removedUser,
-      phone: '',
+      phone: {},
       isPrimaryEmailAddressVerified: false,
       isBackupEmailAddressVerified: false,
     };
@@ -170,7 +169,7 @@ export class UsersService {
 
     const userProps: UserProps = {
       ...user,
-      phone: '',
+      phone: {},
       isPrimaryEmailAddressVerified: false,
       isBackupEmailAddressVerified: false,
     };
