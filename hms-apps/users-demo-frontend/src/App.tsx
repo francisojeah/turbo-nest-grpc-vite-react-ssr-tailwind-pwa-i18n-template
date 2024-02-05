@@ -62,7 +62,7 @@ const App: React.FC<Props> = ({ assetMap }) => {
   const appBody = () => {//can be used at DEV time and PROD time
 
     //Default settings on dev mode
-    let baseUrl = '/';
+    let baseUrl = '/v1';
     let title = 'Hello World';
 
     if (assetMap) {//prod mode. Sent by ssr endpoint.
