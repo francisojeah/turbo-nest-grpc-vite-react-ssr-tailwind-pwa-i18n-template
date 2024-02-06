@@ -4,15 +4,13 @@ import { VersioningType } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { NestExpressApplication } from '@nestjs/platform-express';
 
-require('dotenv').config();
-
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   const swaggerConfig = new DocumentBuilder()
-    .setTitle(process.env.APP_NAME)
-    .setDescription(process.env.APP_DESCRIPTION)
-    .setVersion(process.env.API_VERSION)
+    .setTitle('HMS')
+    .setDescription('A state-of-the-art Hospital Management System designed to streamline healthcare operations, enhance patient care, and optimize administrative processes.')
+    .setVersion('0.0.1')
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig, {
     ignoreGlobalPrefix: false,
@@ -31,11 +29,8 @@ async function bootstrap() {
   } catch (error) {
     this.logger.error(error);
   }
-  
-  await app.listen(
-    process.env.APP_SERVER_LISTEN_PORT,
-    process.env.APP_SERVER_LISTEN_IP,
-  );
+
+  await app.listen(3002);
 
   console.log(`Application is running on: ${await app.getUrl()}`);
 }
