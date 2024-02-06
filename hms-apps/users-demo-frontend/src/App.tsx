@@ -53,9 +53,9 @@ const App: React.FC<Props> = ({ assetMap }) => {
     if (!DEV_MODE) {
       //attempt to change language here to locale
       changeI18nLanguageToClientPreferred();
-      // if (!assetMap) {
-      //   window.location.href = '/web'; //simulate a mouse click
-      // }
+      if (!assetMap) {
+        window.location.href = '/v1'; //simulate a mouse click
+      }
     }
   })
 
@@ -70,6 +70,7 @@ const App: React.FC<Props> = ({ assetMap }) => {
       title = assetMap.initialContentMap.title!;
     }
     console.log(title);
+    console.log(baseUrl);
     //console.log(`assetMap in AppWithNavDemo = ${JSON.stringify(assetMap)}`)
 
   //create a react query client at the top

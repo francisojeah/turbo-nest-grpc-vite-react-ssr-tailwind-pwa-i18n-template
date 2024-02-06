@@ -18,12 +18,5 @@ import Loading from './global/Loading.tsx';
 // )
 
 
-hydrateRoot(document.getElementById('root')!, 
-  <React.StrictMode>
-    <Suspense fallback={<Loading />}>
-      <BrowserRouter>
-        <App assetMap={(window as any).assetMap} />
-      </BrowserRouter>
-    </Suspense>
-  </React.StrictMode>
-);
+//@ts-ignore
+hydrateRoot(document, <React.StrictMode><Suspense loading={<Loading />}><BrowserRouter><App assetMap={window.assetMap} /></BrowserRouter></Suspense></React.StrictMode>);
