@@ -41,7 +41,7 @@ export const AppContext = createContext<AppContextType>(null);
 
 const App: React.FC<Props> = ({ assetMap }) => {
 
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const changeI18nLanguageToClientPreferred = async () => {
     if (i18n.language != assetMap?.clientFirstAcceptLanguage)
@@ -84,9 +84,9 @@ const App: React.FC<Props> = ({ assetMap }) => {
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <Routes>
           <Route path={`${baseUrl}`} element={<Layout />}>
-            <Route index element={<Home />} />
-            <Route path="view-users" element={<Users />} />
-            <Route path="*" element={<NoMatch />} />
+            <Route index element={<Home title={t('home page')}/>} />
+            <Route path="view-users" element={<Users title={t('users')}/>} />
+            <Route path="*" element={<NoMatch title={t('nothing here')}/>} />
           </Route>
         </Routes>
       </ThemeProvider>
