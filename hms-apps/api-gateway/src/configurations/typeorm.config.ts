@@ -1,8 +1,5 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-require('dotenv').config();
-
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: 'mysql',
   port: 3306,
